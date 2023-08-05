@@ -2,6 +2,7 @@ import { log } from "console";
 import { NextPage } from "next";
 import { useEffect, useState } from "react";
 import { ResponsiveAppBar } from "../Components/ResponsiveAppBar";
+import styles from "./index.module.css";
 const HogePage: NextPage = () => {
     // ❶ useStateを使って状態を定義する
     const [imageUrl, setImageUrl] = useState("");
@@ -18,7 +19,12 @@ const HogePage: NextPage = () => {
     return (
     <div>
       <ResponsiveAppBar/>
-      {loading || <img src={imageUrl} />}
+      <div className={styles.page}>
+        < div className={styles.frame}>
+
+        {loading || <img src={imageUrl} className={styles.img} />}
+        </div>
+      </div>
     </div>);
 };
 export default HogePage;
