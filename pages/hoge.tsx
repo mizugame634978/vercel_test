@@ -1,6 +1,7 @@
 import { log } from "console";
 import { NextPage } from "next";
 import { useEffect, useState } from "react";
+import { ResponsiveAppBar } from "../Components/ResponsiveAppBar";
 const HogePage: NextPage = () => {
     // ❶ useStateを使って状態を定義する
     const [imageUrl, setImageUrl] = useState("");
@@ -9,22 +10,26 @@ const HogePage: NextPage = () => {
     useEffect(() => {
       fetchImage().then((newImage) => {
         console.log("ni::",newImage);
-        setImageUrl(newImage.message); // 画像URLの状態を更新する
+        setImageUrl(newImage.image); // 画像URLの状態を更新する
         setLoading(false); // ローディング状態を更新する
       });
     }, []);
     // ❸ ローディング中でなければ、画像を表示する
-    return <div>{loading || <img src={imageUrl} />}</div>;
+    return (
+    <div>
+      <ResponsiveAppBar/>
+      {loading || <img src={imageUrl} />}
+    </div>);
 };
 export default HogePage;
 
 type Image = {
-    message:string;
+    image:string;
 }
 
 
 const fetchImage = async ():Promise<Image> => {
-    const res = await fetch("https://dog.ceo/api/breeds/image/random");
+    const res = await fetch("https://randomfox.ca/floof/");
     const images = await res.json();
     console.log("fi::",images);
     return images;
