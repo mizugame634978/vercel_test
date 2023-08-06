@@ -1,4 +1,4 @@
-import { log } from "console";
+// import { log } from "console";
 import { NextPage } from "next";
 import { useEffect, useState } from "react";
 import { ResponsiveAppBar } from "../Components/ResponsiveAppBar";

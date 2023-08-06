@@ -1,16 +1,7 @@
 import requests
 url = "https://pokeapi.co/api/v2/pokemon/0/"
 res = requests.get(url)
-#res = requests.get("https://zipcloud.ibsnet.co.jp/api/search",params={"zipcode":"5730066"})#こっちの方が見やすい？
-#https://challenge-server.code-check.io/api/hash/?q=hoge ハッシュを求めるapi？
-"""?q=hoge%2Bhogeのようにするとhoge+hogeに対するハッシュが求められる。これは%2Bがurl上で文字としての＋と同じ意味だからである。
-スペース: スペースは「+」または「%20」とエンコードします。
-クエリ文字 (?): クエリ文字は「%3F」とエンコードします。
-ハッシュ記号 (#): ハッシュ記号は「%23」とエンコードします。
-アンパサンド (&): アンパサンドは「%26」とエンコードします。
-プラス (+): プラスは「%2B」とエンコードします。
-パーセント (%) 自体: パーセントは「%25」とエンコードします。
-"""
+
 #print("res",res)#200だと成功
 res_json=res.json()#jsonを辞書型に変換している
 # print(res_json)
@@ -53,10 +44,3 @@ print("背後画像",results)
 
 results = res_json["sprites"]["other"]["official-artwork"]["front_default"]
 print("正面画像2",results)
-'''
-#シンプルに書くと
-url = "https://zipcloud.ibsnet.co.jp/api/search?zipcode=5730066"
-res = requests.get(url)
-res_json=res.json()#jsonを辞書型に変換している
-print(res_json)
-'''

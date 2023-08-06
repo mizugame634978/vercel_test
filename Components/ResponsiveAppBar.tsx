@@ -16,7 +16,7 @@ import Link from "next/link";//他のページに遷移
 import HandymanIcon from '@mui/icons-material/Handyman';//toolの絵文字
 
 
-const pages = ['dog','poke', 'hoge'];//アプリケーションバー内のメニューに表示するページのリスト
+const pages = ['dog','poke', 'fox','bmi'];//アプリケーションバー内のメニューに表示するページのリスト
 
 
 export function ResponsiveAppBar() {
