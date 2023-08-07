@@ -3,6 +3,10 @@ import styles from "./index.module.css";
 import { GetServerSideProps } from "next";
 import { useState } from "react";
 import { ResponsiveAppBar } from "../Components/ResponsiveAppBar";
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import CalculateIcon from '@mui/icons-material/Calculate';
+import ScaleIcon from '@mui/icons-material/Scale';
 
 const bmi = () => {
   const [bmi, setBmi] = useState(0);
@@ -28,24 +32,32 @@ const bmi = () => {
     <div>
       <ResponsiveAppBar />
       <div className={styles.page}>
-        <div className="inputForm">
+        {/* <div className="inputForm">
           <form>
-            {/*サブミット状態の中身を処理する  */}
+
             身長
             <input type="text" onChange={handleSubmit} />
             cm
           </form>
-        </div>
-        <div className="inputForm">
+        </div> */}
+        <TextField id="standard-basic" label="身長(cm)" variant="standard" onChange={handleSubmit} />
+        <TextField id="standard-basic" label="体重(kg)" variant="standard" onChange={handleSubmit2} />
+        {/* <div className="inputForm">
           <form>
             体重
-            {/*サブミット状態の中身を処理する  */}
+
             <input type="text" onChange={handleSubmit2} />
             kg
           </form>
-        </div>
-        <button onClick={calcBmi}>calc</button>
+        </div> */}
+        {/* <button onClick={calcBmi}>calc</button> */}
+        <Button variant="contained"  onClick={calcBmi} startIcon={<CalculateIcon/>}>
+          calc
+        </Button>
+
         <div>あなたのbmiは{bmi}です</div>
+
+
       </div>
     </div>
   );
