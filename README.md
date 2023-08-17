@@ -1,3 +1,4 @@
+現在まだ情報が少ないので、Appディレクトリは使っていない
 ```shell
 yarn add @mui/material @emotion/react @emotion/styled
 ```
@@ -10,3 +11,8 @@ yarn add @mui/icons-material
 yarn build && yarn start
 ```
 でコンパイル＆起動
+
+yarn add uuid
+<!-- ↑ユニークなidをせいせい -->
+yarn add react-beautiful-dnd
+<!-- ↑いい感じのタスク移動を実現 -->

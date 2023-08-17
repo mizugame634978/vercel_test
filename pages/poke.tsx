@@ -41,7 +41,7 @@ const PokePage: NextPage<Props> = ({ inImageUrl,inName,inHeight,inId }) => {
                     草むらをすすむ
                 </button>
                 <div className={styles.frame2}>
-                    {loading || <img src={imageUrl} className={styles.img} />}
+                    {loading || <img src={imageUrl} className={styles.img} alt="画像" />}
                 </div>
                 {loading|| <li>名前：{name}</li>}
                 {loading|| <li>図鑑No:{id}</li>}

@@ -30,7 +30,7 @@ const DogPage: NextPage<Props> = ({ initialImageUrl }) => {
                 きょうのイッヌ🐶
             </button>
             <div className={styles.frame}>
-                {loading || <img src={imageUrl} className={styles.img} />}
+                {loading || <img src={imageUrl} className={styles.img} alt="画像"/>}
             </div>
 
         </div>

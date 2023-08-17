@@ -22,7 +22,7 @@ const HogePage: NextPage = () => {
       <div className={styles.page}>
         < div className={styles.frame}>
 
-        {loading || <img src={imageUrl} className={styles.img} />}
+        {loading || <img src={imageUrl} className={styles.img}alt="画像" />}
         {/*
           Ensures <img> elements have alternate text or a role of none or presentation
           訳：画像に代用テキストを入れてないので怒られている

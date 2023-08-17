@@ -11,12 +11,12 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import Link from "next/link";//他のページに遷移
 
+import Link from '@mui/material/Link';
 import HandymanIcon from '@mui/icons-material/Handyman';//toolの絵文字
 
 
-const pages = ['dog','poke', 'fox','bmi'];//アプリケーションバー内のメニューに表示するページのリスト
+const pages = ['dog','poke', 'fox','bmi','todo'];//アプリケーションバー内のメニューに表示するページのリスト
 
 
 export function ResponsiveAppBar() {
@@ -89,7 +89,7 @@ export function ResponsiveAppBar() {
                 <MenuItem key={page} onClick={handleCloseNavMenu}  >
                   {/* <Link href={`/${page}`}> */}
                   <Typography textAlign="center" >
-                    <Link href={`/${page}`}>
+                    <Link href={`/${page}`} underline="none" color="inherit">
                       {page}
                     </Link>
                   </Typography>

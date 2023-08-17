@@ -1,0 +1,12 @@
+/* タスクのチェクボタンを押したときの変化 */
+.completed {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+.todoText {
+  min-width: 15rem;
+  max-height: 1.8rem;
+  padding: 0.3rem 4rem;
+
+}
