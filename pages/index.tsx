@@ -1,95 +1,51 @@
-import { GetServerSideProps, NextPage } from "next";
+// import { log } from "console";
+import { NextPage } from "next";
 import { useEffect, useState } from "react";
+import { ResponsiveAppBar } from "../Components/ResponsiveAppBar";
 import styles from "./index.module.css";
-import { Header } from "../Components/Header";
-import {ResponsiveAppBar}from "../Components/ResponsiveAppBar";
-type Props = {
-    initialImageUrl: string;
-}
 
-const IndexPage: NextPage<Props> = ({ initialImageUrl }) => {
-    const [imageUrl, setImageUrl] = useState(initialImageUrl);
-    const [loading, setLoading] = useState(false);
-    //マウント時に画像を読み込む
-    // useEffect(() => {//useEffectはreactの関数
-    //     fetchImage().then((newImage) => {
-    //         setImageUrl(newImage.url);
-    //         setLoading(false);
-    //     });
-    // }, []);//第２引数にからの配列がある。
 
-    //ボタンを押したときに画像を読み込む処理
-    const handleClick = async () => {
-        setLoading(true);//読み込み中フラグ
-        const newImage = await fetchImage();
-        setImageUrl(newImage.url);
-        setLoading(false);
-    };
+const HogePage: NextPage = () => {
+    // (1) useStateを使って状態を定義する
+    const [dateCommit,setDateCommit] = useState("");
+    const [loading, setLoading] = useState(true);
+    const [date,setDate] = useState("");
+
+    // (2) マウント時に画像を読み込む宣言
+    useEffect(() => {
+      fetchApi().then((newImage) => {
+        const time0 =new Date( newImage[0]["commit"]["committer"]["date"] );
+        const tokyoTimeOffset = 9 * 60 * 60 * 1000; // Tokyoのタイムゾーンオフセット（ミリ秒）
+        const tokyoTime = new Date(time0.getTime() + tokyoTimeOffset); // Tokyoのローカルタイム
+        console.log("ni::",newImage);
+        setDateCommit(newImage[0]["commit"]["message"]);
+        setDate(String(tokyoTime));
+        setLoading(false); // ローディング状態を更新する
+      });
+    }, []);
+    // (3) ローディング中でなければ、画像を表示する
     return (
-        <div>
-            <ResponsiveAppBar/>
-        <div className={styles.page}>
-
-            {/* <button onClick={handleClick}className={styles.button}>
-                他のにゃんこも見る */}
-            {/* <button
-                onClick={handleClick}
-                style={{
-                    backgroundColor: "#319795",
-                    border: "none",
-                    borderRadius: "4px",
-                    color: "white",
-                    padding: "4px 8px",
-                }}
-            >
-                きょうのにゃんこ🐱nn
-            </button> */}
-             <button onClick={handleClick} className={styles.button}>
-                他のにゃんこも見る
-            </button>
-            <div className={styles.frame}>
-                {loading || <img src={imageUrl} className={styles.img} alt="画像"/>}
-            </div>
-
-        </div>
-        </div>
-    );
+    <div>
+      <ResponsiveAppBar/>
+      <div className={styles.page}>
+        <h1>最終更新</h1>
+        <div>{date}</div>
+        <br />
+        <div>{dateCommit}</div>
+      </div>
+    </div>);
 };
-export default IndexPage;
+export default HogePage;
 
-//サーバーサイドで実行する処理
-export const getServerSideProps: GetServerSideProps<Props> = async () => {
-    const image = await fetchImage();
-
-
-    return {
-        props: {
-            initialImageUrl: image.url,
-        },
-    };
-
-};
-
-
-type Image = {
-    url: string;
+type ApiType = {
+    image:string;
 }
 
-const fetchImage = async (): Promise<Image> => {
-    const res = await fetch("https://api.thecatapi.com/v1/images/search");
+
+const fetchApi = async ():Promise<ApiType> => {
+    const res = await fetch("https://api.github.com/repos/mizugame634978/vercel_test/commits");
     const images = await res.json();
+    console.log("fi::",images);
+    return images;
+  };
 
-    return images[0];
-}
-/*
-apiの返り値は以下の通りなので、[0]が必要
-    複数の画像を返却することも想定されている？
-[
-  {
-    "id": "c7h",
-    "url": "https://cdn2.thecatapi.com/images/c7h.jpg",
-    "width": 820,
-    "height": 883
-  }
-]
-*/

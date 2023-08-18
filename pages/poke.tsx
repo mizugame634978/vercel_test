@@ -1,7 +1,7 @@
 import { GetServerSideProps, NextPage } from "next";
 import { useEffect, useState } from "react";
 import styles from "./index.module.css";
-import { Header } from "../Components/Header";
+
 import { ResponsiveAppBar } from "../Components/ResponsiveAppBar";
 type Props = {
     inImageUrl: string
