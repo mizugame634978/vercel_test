@@ -14,3 +14,7 @@ print(len(res_json))
 results2 = res_json[0]["commit"]["committer"]["date"]
 print(results2)
 # 2023-08-17T14:14:30Z 日付が取得できた。
+
+print(res_json[11]["commit"]["message"])
+print(res_json[11]["commit"]["committer"]["date"])
+print(len(res_json))

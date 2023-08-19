@@ -1,4 +1,4 @@
-// import { log } from "console";
+
 import { NextPage } from "next";
 import { useEffect, useState } from "react";
 import { ResponsiveAppBar } from "../Components/ResponsiveAppBar";
@@ -11,18 +11,22 @@ const HogePage: NextPage = () => {
     const [dateCommit,setDateCommit] = useState("");
     const [loading, setLoading] = useState(true);
     const [date,setDate] = useState("");
+    const [apiList,setApiList] = useState([]);
 
     // (2) マウント時にapiを読み込む宣言
     useEffect(() => {
       fetchApi().then((newImage) => {
+        const newItems = [];
+        for(let i = 0;i < 3 && i < Object.keys(newImage).length;i++){
+          const time0 =new Date( newImage[i]["commit"]["committer"]["date"] );
+          const tokyoTime = time0.toLocaleString('ja-jp');
+          newItems.push({//setApiListは非同期なので、ループ内で使うとうまく行かないことがある
+            date: tokyoTime,
+            message: newImage[i]["commit"]["message"],
+          });
 
-        const time0 =new Date( newImage[0]["commit"]["committer"]["date"] );
-        // const hoge = time0.toLocaleDateString('en-jp',{ weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' });
-        const japanTime:String = time0.toLocaleString('ja-jp');//2023-08-18T06:33:34Zが2023/8/18 15:33:34になった、＋９時間されてる
-
-
-        setDateCommit(newImage[0]["commit"]["message"]);
-        setDate(String(japanTime));
+        }
+        setApiList(newItems); // 全てのアイテムを一度に設定する
         setLoading(false); // ローディング状態を更新する
       });
     }, []);
@@ -30,10 +34,16 @@ const HogePage: NextPage = () => {
     return (
     <div>
       <ResponsiveAppBar/>
+
       <div className={styles.page}>
         <h1>最終更新</h1>
-        <div>{date}</div>
-        <div>{dateCommit}</div>
+        {apiList.map((api,index)=>(
+          <div>
+            <span className={styles.text_primary2}>{api.date}</span>
+            {api.message}
+          </div>
+        ))}
+
       </div>
     </div>);
 };
@@ -47,7 +57,9 @@ type ApiType = {
 const fetchApi = async ():Promise<ApiType> => {
     const res = await fetch("https://api.github.com/repos/mizugame634978/vercel_test/commits");
     const images = await res.json();
-    console.log("fi::",images);
+
+    console.log(Object.keys(images).length);
+
     return images;
   };
 
