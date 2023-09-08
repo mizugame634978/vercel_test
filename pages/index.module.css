@@ -117,3 +117,31 @@
     color: white;
     background-color: #319795;
 }
+
+.default_badge {
+    background-color: #319795; /* 背景色 */
+    color: #ebf8ff; /* テキスト色 */
+    font-size: 0.875rem; /* フォントサイズ */
+    font-weight: 500; /* フォントの太さ */
+    margin-right: 0.5rem; /* 右のマージン */
+    padding-left: 0.625rem; /* 左のパディング */
+    padding-right: 0.625rem; /* 右のパディング */
+    padding-top: 0.125rem; /* 上のパディング */
+    padding-bottom: 0.125rem; /* 下のパディング */
+    border-radius: 0.25rem; /* 角丸 */
+    display: inline-block;/*バッジを行内ブロック要素として表示し、テキストとの間に余白がないようにします。*/
+}
+
+.badge {
+    background-color: #319795; /* 背景色 */
+    color: #ebf8ff; /* テキスト色 */
+    display: inline-block;/*バッジを行内ブロック要素として表示し、テキストとの間に余白がないようにします。*/
+    padding: 0.25em 0.5em; /* パディング（上下0.25em、左右0.5em） */
+    font-size: 75%; /* フォントサイズを元のサイズの75%に設定 */
+    font-weight: 700; /* フォントの太さ（太字） */
+    line-height: 1; /* 行の高さをフォントサイズに合わせる */
+    text-align: center; /* テキストを中央揃え */
+    white-space: nowrap; /* テキストを折り返ししないようにする */
+    vertical-align: baseline; /* ベースラインに基づいて垂直に配置 */
+    border-radius: 0.25rem; /* 角丸（角の丸み） */
+}

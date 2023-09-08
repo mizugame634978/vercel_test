@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { ResponsiveAppBar } from "../Components/ResponsiveAppBar";
 import styles from "./index.module.css";
 
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 
 const HogePage: NextPage = () => {
     // (1) useStateを使って状態を定義する
@@ -39,7 +41,7 @@ const HogePage: NextPage = () => {
         <h1>最終更新</h1>
         {apiList.map((api,index)=>(
           <div>
-            <span className={styles.text_primary2}>{api.date}</span>
+            <span className={styles.default_badge}>{api.date}</span>
             {api.message}
           </div>
         ))}
