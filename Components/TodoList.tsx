@@ -1,14 +1,18 @@
 import React from "react";
+// ドラッグ＆ドロップのライブラリ
 import { Droppable } from "react-beautiful-dnd";
 import { Draggable } from "react-beautiful-dnd";
 import { DragDropContext } from "react-beautiful-dnd";
-import CheckIcon from '@mui/icons-material/Check';
-import DeleteIcon from '@mui/icons-material/Delete';
+//コンポーネント
 import Button from '@mui/material/Button';
-import todoStyles from  './todoList.module.css';
+import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
+//アイコン
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import DeleteIcon from '@mui/icons-material/Delete';
+import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
+//css
+import todoStyles from  './todoList.module.css';
 import styles from './todoList.module.css'
 
 
@@ -71,18 +75,18 @@ export const TodoList = ({ taskList, setTaskList }) => {
                 {taskList.map((task,index) => (
                   <Draggable key={task.id} draggableId={task.id} index={index}>
                     {(provided, snapshot) => (
-                      <div className={`${task.completed ? todoStyles.completed : ""}`} key={index}ref={provided.innerRef}
+                      <div key={index}ref={provided.innerRef}
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}//providedがついているものはドラック＆ドロップ関連
                       >
                         <div >
-                          {/* <Button variant="contained"  onClick={()=>handleCompleted(task.id)} startIcon={<CheckIcon/>}></Button> */}
-
-                          <Button variant="contained"  onClick={()=>handleCompleted(task.id)}
+                          <Button variant="text"  onClick={()=>handleCompleted(task.id)}
                             startIcon={task.completed ?  <CheckBoxIcon/>: <CheckBoxOutlineBlankIcon/>}
                           />
-                          <span className={styles.todoText}>{task.text}</span>
-                          <Button variant="contained"  onClick={()=>handleDelete(task.id)} startIcon={<DeleteIcon/>}/>
+                          <span className={`${task.completed ? todoStyles.completed : ""}`}>
+                            <span className={styles.todoText}>{task.text}</span>
+                          </span>
+                          <Button variant="text"  onClick={()=>handleDelete(task.id)} startIcon={<DeleteIcon/>}/>
                         </div>
 
 
